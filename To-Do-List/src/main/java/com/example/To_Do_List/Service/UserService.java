@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -32,7 +33,6 @@ public class UserService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
         User savedUser = userRepository.save(user);
-        System.out.println(savedUser.getDate());
         return mapToResponse(savedUser);
     }
 
@@ -55,8 +55,11 @@ public class UserService {
         return user;
     }
 
-    public List<User> getUser() {
-        return userRepository.findAll();
+    public List<UserResponse> getUser() {
+        List<User>userList = userRepository.findAll();
+        return userList.stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
     }
 
 }

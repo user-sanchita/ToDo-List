@@ -41,7 +41,7 @@ public class UserController {
 
     }
     @GetMapping("/get")
-    public ResponseEntity<List<User>> getUser(@RequestHeader("Authorization")String token){
+    public ResponseEntity<List<UserResponse>> getUser(@RequestHeader("Authorization")String token){
         return ResponseEntity.ok(userService.getUser());
     }
 
