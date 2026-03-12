@@ -20,8 +20,7 @@ import java.util.List;
 public class To_Do_Controller {
     @Autowired
     private To_Do_Service toDoService;
-//    @Autowired
-//    private CacheService cacheService;
+
     @PostMapping("/todo/register")
     public ResponseEntity<To_Do_Response>register(@Valid@RequestBody To_Do_Request request){
         return ResponseEntity.ok(toDoService.register(request));
@@ -37,8 +36,5 @@ public class To_Do_Controller {
         else sort = Sort.by(sortBy).descending();
         return toDoService.getAllTodos(PageRequest.of(pageNo,pageSize,sort),searchName);
     }
-//    @GetMapping("/cachedata")
-//    public void getCacheData(){
-//        cacheService.printCacheContents("too");
-//    }
+
 }
